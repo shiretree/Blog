@@ -1,0 +1,4 @@
+#用来介绍项目需要的软件,也可以用来配置PyPI的源。
+Django~=1.11
+-i http://pypi.doubanio.com/simple/
+-e .
