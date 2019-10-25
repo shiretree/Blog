@@ -1,3 +1,5 @@
+from django.contrib.admin.models import LogEntry       #查看日志操作
+
 from django.contrib import admin
 from django.shortcuts import reverse
 from django.utils.html import format_html
@@ -7,6 +9,9 @@ from django.contrib.auth import get_permission_codename    #用来重写get_prem
 from blog.custom_site import custom_site
 from .models import Post, Category, Tag
 from .adminForms import PostAdminForm
+
+from blog.base_admin import BaseOwnerAdmin
+
 
 # Register your models here.
 
@@ -25,16 +30,16 @@ class PostInline(admin.TabularInline):         #还有个样式是StackedInline,
 
 
 @admin.register(Category, site=custom_site)    #注册绑定,装饰器模式
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(BaseOwnerAdmin):
 
     inlines = [PostInline]         # 对应上面的PostInline类，没什么用，因为上面类里只定义的两个字段，无法添加完整文章
 
     list_display = ('name','status','is_nav','created_time','post_count')   #显示用
     fields = ('name','status','is_nav','owner')                #添加时出现
 
-    def save_model(self, request, obj, form, change):
+    """def save_model(self, request, obj, form, change):
         obj.owner = request.user
-        return super(CategoryAdmin, self).save_model(request, obj, form, change)
+        return super(CategoryAdmin, self).save_model(request, obj, form, change) """
 
     def post_count(self,obj):
         return obj.post_set.count()           #obj.post_set 当前文章集合，django自带，应该是
@@ -42,13 +47,10 @@ class CategoryAdmin(admin.ModelAdmin):
     post_count.short_description = '文章数量'
 
 @admin.register(Tag, site=custom_site)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(BaseOwnerAdmin):
     list_display = ('name','status','created_time')
     fields = ('name','status')
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super(TagAdmin, self).save_model(request, obj, form, change)
 
 
 
@@ -73,7 +75,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 
 @admin.register(Post, site=custom_site)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(BaseOwnerAdmin):
 
     form = PostAdminForm       #上面form导入一下，下面这儿写一下，就应用成功了adminForms.py这个里的form组建，而不是原来的ModelAdmin
 
@@ -124,8 +126,8 @@ class PostAdmin(admin.ModelAdmin):
         })
     )
 
-    filter_horizontal = ('tag',)    #django用来显示多对多字段，横排或者竖排
-
+    #filter_horizontal = ('tag',)    #django用来显示多对多字段，横排或者竖排
+    filter_vertical = ('tag', )
 
     def operator(self, obj):    #自定义函数，参数是固定的，就是当前行对象，可以返回html
         return format_html(
@@ -136,16 +138,16 @@ class PostAdmin(admin.ModelAdmin):
 
     operator.short_description = '操作'
 
-    def save_model(self, request, obj, form, change):
+    """def save_model(self, request, obj, form, change):
         obj.owner = request.user
         return super(PostAdmin, self).save_model(request, obj, form, change)
 
     def get_queryset(self, request):          #用来约束用户只能看到自己写的文章，重写get_queryset方法
         qs = super(PostAdmin, self).get_queryset(request)
-        return qs.filter(owner=request.user)
+        return qs.filter(owner=request.user)"""
 
 
-    def has_add_permission(self, request):           #用来重写用户对该表的权限
+    """def has_add_permission(self, request):           #用来重写用户对该表的权限,示例
         opts = self.opts
         codename = get_permission_codename('add', opts)
         perm_code = "%s.%s" % (opts.app_label, codename)
@@ -153,7 +155,7 @@ class PostAdmin(admin.ModelAdmin):
         if resp.status_code == 200:
             return True
         else:
-            return False
+            return False"""
 
 
     class Media:     #用来在django的admin的页面中添加bootstrap的css效果, 兼容性不好，需要调整，有空查，问题保留
@@ -162,6 +164,10 @@ class PostAdmin(admin.ModelAdmin):
         }
         js = ("https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js", )
 
+
+@admin.register(LogEntry, site=custom_site)
+class LogEntryAdmin(admin.ModelAdmin):
+    list_display = ['object_repr','object_id','action_flag','user','change_message']
 
 
 

@@ -16,9 +16,18 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from main.views import post_list, post_detail
+from config.views import links
 from .custom_site import custom_site        #新加
 
 urlpatterns = [
+
+    url(r'^$', post_list),
+    url(r'^category/(?P<category_id>\d+)/$', post_list),
+    url(r'^tag/(?P<tag_id>\d+)/$', post_list),
+    url(r'^post/(?P<post_id>\d+).html$', post_detail),
+    url(r'^links/$', links),
+
     url(r'^super_admin/', admin.site.urls),         #新加   ，用户和组被调到了这儿
     url(r'^admin/', custom_site.urls),              #有改
 ]

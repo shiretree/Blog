@@ -2,17 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1a41373-e9ab-4c2b-92ab-3bd4acc2f069" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/blog/custom_site.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/migrations/0002_auto_20191024_2307.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/adminForms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/migrations/0002_post_status.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/base_admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/templates/config/blocks/sidebar_comments.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/templates/config/blocks/sidebar_posts.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/templates/main/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/templates/main/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/migrations/0003_auto_20191025_2243.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/setting/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/setting/base.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/comment/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +46,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -53,6 +59,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Blog-env" />
@@ -96,7 +103,8 @@
       <workItem from="1571813775064" duration="1116000" />
       <workItem from="1571814946151" duration="648000" />
       <workItem from="1571815640416" duration="7080000" />
-      <workItem from="1571903748230" duration="16393000" />
+      <workItem from="1571903748230" duration="16716000" />
+      <workItem from="1571985978166" duration="19421000" />
     </task>
     <servers />
   </component>
